@@ -1,10 +1,12 @@
 package com.blogspot.raulfmiranda.dogame;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,56 +21,65 @@ import com.blogspot.raulfmiranda.dogame.quiz.Quiz;
 import com.blogspot.raulfmiranda.dogame.quiz.QuizFragment;
 import com.blogspot.raulfmiranda.dogame.ranking.RankingFragment;
 
-public class DogameActivity extends AppCompatActivity
+public class DogameActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int HOME    = 1;
+    private static final int QUIZ    = 2;
+    private static final int RANKING = 3;
+    private static final int LIST    = 4;
+
+    private int currentScreen;
+
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dogame);
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        showHome();
+        markMenu(HOME);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (currentScreen == HOME)
+                logout();
+            else
+                showHome();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dogame, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Todo: Criar as configurações do game
             return true;
         }
 
@@ -77,28 +88,84 @@ public class DogameActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_quiz) {
-//            FragmentManager fm = getSupportFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.add(R.id.activity_dogame, QuizFragment.newInstance());
-//            ft.commit();
+        if (id == R.id.nav_home) {
+            if (currentScreen != HOME)
+                showHome();
+        } else if (id == R.id.nav_quiz) {
+            if (currentScreen != QUIZ)
+                showQuiz();
         } else if (id == R.id.nav_ranking) {
-//            FragmentManager fm = getSupportFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.add(R.id.activity_dogame, RankingFragment.newInstance());
-//            ft.commit();
-
+            if (currentScreen != RANKING)
+                showRanking();
         } else if (id == R.id.nav_list_dog) {
 
         } else if (id == R.id.nav_logout) {
-
+            logout();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showHome() {
+        currentScreen = HOME;
+        showFragment(R.id.activity_dogame, HomeFragment.newInstance());
+    }
+
+    private void showQuiz() {
+        currentScreen = QUIZ;
+        showFragment(R.id.activity_dogame, QuizFragment.newInstance());
+    }
+
+    private void showRanking() {
+        currentScreen = RANKING;
+        showFragment(R.id.activity_dogame, RankingFragment.newInstance());
+    }
+
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+            .setCancelable(false)
+            .setMessage("Tem certeza que deseja sair?")
+            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //TODO: Efetuar o logout
+                    //presenter.logout();
+                    //TODO: Exibir o login
+                    //exibirLogin();
+                    dialogInterface.dismiss();
+                }
+            })
+            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    markMenu(currentScreen);
+                    dialogInterface.dismiss();
+                }
+            });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void markMenu(int screen) {
+        switch (screen) {
+            case HOME:
+                navigationView.setCheckedItem(R.id.nav_home);
+                break;
+            case QUIZ:
+                navigationView.setCheckedItem(R.id.nav_quiz);
+                break;
+            case RANKING:
+                navigationView.setCheckedItem(R.id.nav_ranking);
+                break;
+            case LIST:
+                navigationView.setCheckedItem(R.id.nav_list_dog);
+                break;
+            default:
+                break;
+        }
     }
 }
