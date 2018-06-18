@@ -1,9 +1,18 @@
 package com.blogspot.raulfmiranda.dogame.entity;
 
 public class User {
+
+    public static final String TABELA = "users";
+
     private String id;
     private String name;
     private int score;
+
+    public User(String id, String name) {
+        this.id = id;
+        this.name = name;
+        score = 0;
+    }
 
     public String getId() {
         return id;
