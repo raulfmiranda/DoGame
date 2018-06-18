@@ -6,6 +6,12 @@ import com.blogspot.raulfmiranda.dogame.entity.User;
 import java.util.List;
 
 public interface Quiz {
-    public interface View {}
-    public interface Presenter {}
+    interface View {
+        void loadScreen(Dog dog);
+        void randomDogSuccessfullyRetrieved(Dog dog);
+    }
+    interface Presenter {
+        void requestRandomDog();
+        void randomDogSuccessfullyRetrieved(Dog dog);
+    }
 }
