@@ -7,14 +7,13 @@ import retrofit2.Callback
 
 class DogAPI {
 //    API Reference:
-//    https://dog.ceo/api/breeds/list/all
 //    https://dog.ceo/api/breed/hound/list
 
     companion object {
         private val baseUrl = "https://dog.ceo/api/"
         private val TAG = ProjectConstants.TAG
 
-//    https://dog.ceo/api/breeds/image/random
+//      https://dog.ceo/api/breeds/image/random
         fun getRandomDogResponse(callback: Callback<DogResponse?>) {
             try {
                 val call = RetrofitInitializer(baseUrl).dogResponseService().getRandomDogResponse()

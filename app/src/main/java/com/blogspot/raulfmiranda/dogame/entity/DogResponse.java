@@ -54,6 +54,7 @@ public class DogResponse {
             dog.setBreed(breed);
             dog.setSubBreed(subBreed);
             dog.setImageName(segments.get(imageNameIndex));
+            dog.setImageUrl(this.imageUrl);
         }
 
         return dog;
