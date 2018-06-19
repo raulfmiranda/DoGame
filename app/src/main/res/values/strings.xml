@@ -17,12 +17,6 @@
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="score">Score: %1$d</string>
+    <string name="not_checked">Choose an option.</string>
 </resources>
-
-<!--<string name="password">Senha</string>-->
-<!--<string name="login">Entrar</string>-->
-<!--<string name="signup">Cadastrar-se</string>-->
-<!--<string name="confirm_password">Confirma password</string>-->
-<!--<string name="register">Cadastrar</string>-->
-<!--<string name="action_settings">Configurações</string>-->
 

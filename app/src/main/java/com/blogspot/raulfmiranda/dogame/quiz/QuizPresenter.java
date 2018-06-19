@@ -3,10 +3,14 @@ package com.blogspot.raulfmiranda.dogame.quiz;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.entity.DogModel;
 
+import java.util.List;
+import java.util.Random;
+
 class QuizPresenter implements Quiz.Presenter {
 
     private DogModel dogModel = new DogModel(this);
     private Quiz.View view;
+    private Dog currentDog;
     private int score = 0;
 
     public QuizPresenter(Quiz.View view) {
@@ -21,12 +25,25 @@ class QuizPresenter implements Quiz.Presenter {
 
     @Override
     public void randomDogSuccessfullyRetrieved(Dog dog) {
-        view.randomDogSuccessfullyRetrieved(dog, dogModel.getFourRandomBreeds(dog.getBreedSubreed()));
+
+        currentDog = dog;
+        List<String> randomBreeds = dogModel.getFourRandomBreeds(dog.getBreedSubreed());
+        Random rand = new Random();
+        randomBreeds.add(rand.nextInt(randomBreeds.size() + 1), dog.getBreedSubreed() + "(A)");
+
+        view.randomDogSuccessfullyRetrieved(dog, randomBreeds);
     }
 
     @Override
-    public void updateScore() {
-        this.score++;
+    public void updateScore(String checkedAnswer) {
+
+        checkedAnswer = checkedAnswer.replace(" ", "-");
+        checkedAnswer = checkedAnswer.replace("(A)", "");
+
+        if(checkedAnswer.equals(currentDog.getBreedSubreed()))
+            this.score++;
+        else
+            this.score = 0;
     }
 
     @Override
