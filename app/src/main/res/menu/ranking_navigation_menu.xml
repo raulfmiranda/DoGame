@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_general"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Geral"/>
+
+    <item
+        android:id="@+id/navigation_monthly"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Mensal"/>
+
+    <item
+        android:id="@+id/navigation_weekly"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Semanal"/>
+
+    <item
+        android:id="@+id/navigation_daily"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Diário"/>
+</menu>
