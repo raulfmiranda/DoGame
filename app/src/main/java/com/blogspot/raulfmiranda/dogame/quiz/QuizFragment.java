@@ -8,30 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.raulfmiranda.dogame.DogameActivity;
+import com.blogspot.raulfmiranda.dogame.HomeFragment;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
-import com.blogspot.raulfmiranda.dogame.entity.Model;
 import com.blogspot.raulfmiranda.dogame.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class QuizFragment extends Fragment implements Quiz.View {
 
     private Quiz.Presenter presenter;
     Button btnNext;
     Button btnSkip;
+    ImageButton ibtClose;
     RadioGroup rdGroup;
     RadioButton checkedRdButton;
     ImageView imgView;
     TextView txtScore;
+    TextView txtTime;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -55,9 +57,11 @@ public class QuizFragment extends Fragment implements Quiz.View {
 
         btnNext = view.findViewById(R.id.btnNext);
         btnSkip = view.findViewById(R.id.btnSkip);
+        ibtClose = view.findViewById(R.id.ibtClose);
         rdGroup = view.findViewById(R.id.rdGroup);
         imgView = view.findViewById(R.id.imgDog);
-        txtScore = view.findViewById(R.id.txtHeader);
+        txtScore = view.findViewById(R.id.txtScore);
+        txtTime = view.findViewById(R.id.txtTime);
         rdGroup = view.findViewById(R.id.rdGroup);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +73,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
                 if(checkRdBtnId == -1) {
                     Toast.makeText(getActivity(), getString(R.string.not_checked), Toast.LENGTH_SHORT).show();
                 } else {
+                    presenter.stopTimer();
                     checkedRdButton = rdGroup.findViewById(checkRdBtnId);
                     presenter.updateScore(QuizChoice.NEXT, checkedRdButton.getText().toString());
                     presenter.requestRandomDog();
@@ -80,8 +85,19 @@ public class QuizFragment extends Fragment implements Quiz.View {
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                presenter.stopTimer();
                 presenter.updateScore(QuizChoice.SKIP, null);
                 presenter.requestRandomDog();
+            }
+        });
+
+        ibtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.stopTimer();
+//                DogameActivity dogameActivity = (DogameActivity) getActivity();
+//                if(dogameActivity != null)
+//                    dogameActivity.showFragment(R.id.activity_dogame, HomeFragment.newInstance());
             }
         });
 
@@ -106,19 +122,29 @@ public class QuizFragment extends Fragment implements Quiz.View {
             breed = breed.replace("-", " ");
             rdButton.setText(breed);
         }
+        presenter.startTimer();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-
         presenter.requestRandomDog();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.stopTimer();
+        super.onPause();
     }
 
     @Override
     public void randomDogSuccessfullyRetrieved(Dog dog, List<String> randomBreeds) {
         loadScreen(dog, randomBreeds);
+    }
+
+    @Override
+    public void setTime(int time) {
+        txtTime.setText(getString(R.string.time, time));
     }
 }

@@ -1,7 +1,7 @@
 package com.blogspot.raulfmiranda.dogame.entity.remote
 
 import android.util.Log
-import com.blogspot.raulfmiranda.dogame.ProjectConstants
+import com.blogspot.raulfmiranda.dogame.Util
 import com.blogspot.raulfmiranda.dogame.entity.DogResponse
 import retrofit2.Callback
 
@@ -11,7 +11,7 @@ class DogAPI {
 
     companion object {
         private val baseUrl = "https://dog.ceo/api/"
-        private val TAG = ProjectConstants.TAG
+        private val TAG = Util.TAG
 
 //      https://dog.ceo/api/breeds/image/random
         fun getRandomDogResponse(callback: Callback<DogResponse?>) {

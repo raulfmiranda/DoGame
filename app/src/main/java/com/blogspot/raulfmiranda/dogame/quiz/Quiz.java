@@ -8,11 +8,14 @@ import java.util.List;
 public interface Quiz {
     interface View {
         void randomDogSuccessfullyRetrieved(Dog dog, List<String> breeds);
+        void setTime(int time);
     }
     interface Presenter {
         void requestRandomDog();
         void randomDogSuccessfullyRetrieved(Dog dog);
         void updateScore(QuizChoice quizChoice, String checkedAnswer);
         int getScore();
+        void startTimer();
+        void stopTimer();
     }
 }

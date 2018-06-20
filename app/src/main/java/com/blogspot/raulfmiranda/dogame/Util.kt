@@ -1,6 +1,6 @@
 package com.blogspot.raulfmiranda.dogame
 
-class ProjectConstants {
+class Util {
     companion object {
         val TAG = "dogame"
     }
