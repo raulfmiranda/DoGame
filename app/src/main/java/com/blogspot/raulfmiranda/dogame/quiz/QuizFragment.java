@@ -27,6 +27,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
 
     private Quiz.Presenter presenter;
     Button btnNext;
+    Button btnSkip;
     RadioGroup rdGroup;
     RadioButton checkedRdButton;
     ImageView imgView;
@@ -53,6 +54,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
         btnNext = view.findViewById(R.id.btnNext);
+        btnSkip = view.findViewById(R.id.btnSkip);
         rdGroup = view.findViewById(R.id.rdGroup);
         imgView = view.findViewById(R.id.imgDog);
         txtScore = view.findViewById(R.id.txtHeader);
@@ -68,10 +70,18 @@ public class QuizFragment extends Fragment implements Quiz.View {
                     Toast.makeText(getActivity(), getString(R.string.not_checked), Toast.LENGTH_SHORT).show();
                 } else {
                     checkedRdButton = rdGroup.findViewById(checkRdBtnId);
-                    presenter.updateScore(checkedRdButton.getText().toString());
+                    presenter.updateScore(QuizChoice.NEXT, checkedRdButton.getText().toString());
                     presenter.requestRandomDog();
                 }
 
+            }
+        });
+
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.updateScore(QuizChoice.SKIP, null);
+                presenter.requestRandomDog();
             }
         });
 

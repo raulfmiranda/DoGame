@@ -35,15 +35,25 @@ class QuizPresenter implements Quiz.Presenter {
     }
 
     @Override
-    public void updateScore(String checkedAnswer) {
+    public void updateScore(QuizChoice quizChoice, String checkedAnswer) {
 
-        checkedAnswer = checkedAnswer.replace(" ", "-");
-        checkedAnswer = checkedAnswer.replace("(A)", "");
+        switch (quizChoice) {
+            case NEXT:
+                checkedAnswer = checkedAnswer.replace(" ", "-");
+                checkedAnswer = checkedAnswer.replace("(A)", "");
 
-        if(checkedAnswer.equals(currentDog.getBreedSubreed()))
-            this.score++;
-        else
-            this.score = 0;
+                if(checkedAnswer.equals(currentDog.getBreedSubreed()))
+                    this.score++;
+                else
+                    this.score = 0;
+                break;
+            case SKIP:
+                if(this.score > 0)
+                    this.score--;
+                break;
+        }
+
+
     }
 
     @Override

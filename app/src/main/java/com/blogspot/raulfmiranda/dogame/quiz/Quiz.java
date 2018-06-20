@@ -12,7 +12,7 @@ public interface Quiz {
     interface Presenter {
         void requestRandomDog();
         void randomDogSuccessfullyRetrieved(Dog dog);
-        void updateScore(String checkedAnswer);
+        void updateScore(QuizChoice quizChoice, String checkedAnswer);
         int getScore();
     }
 }
