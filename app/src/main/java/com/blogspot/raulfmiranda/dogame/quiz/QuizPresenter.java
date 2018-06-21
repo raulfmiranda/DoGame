@@ -60,6 +60,9 @@ class QuizPresenter implements Quiz.Presenter {
                 if(this.score > 0)
                     this.score--;
                 break;
+            case TIMEOUT:
+                this.score = 0;
+                break;
         }
     }
 
@@ -96,7 +99,13 @@ class QuizPresenter implements Quiz.Presenter {
     }
 
     private void updateTime() {
-        this.time--;
-        view.setTime(QuizPresenter.this.time);
+        if(this.time > 0) {
+            this.time--;
+            view.setTime(QuizPresenter.this.time);
+        } else {
+            stopTimer();
+            updateScore(QuizChoice.TIMEOUT, null);
+            requestRandomDog();
+        }
     }
 }

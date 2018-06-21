@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/containerBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".quiz.QuizFragment">
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/score"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="@+id/ibtClose"
         app:layout_constraintEnd_toStartOf="@+id/ibtClose"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -36,6 +38,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/textColor"
         android:text="@string/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,30 +55,35 @@
 
         <RadioButton
             android:id="@+id/rdAnswer0"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/rdAnswer1"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/rdAnswer2"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/rdAnswer3"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/rdAnswer4"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -89,6 +97,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/next"
+        android:textColor="@color/textColor"
+        android:background="@color/secondaryBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -103,6 +113,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/skip"
+        android:textColor="@color/textColor"
+        android:background="@color/secondaryBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
         app:layout_constraintHorizontal_bias="0.5"
@@ -116,6 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/time"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="@+id/ibtClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ibtClose"

@@ -95,9 +95,9 @@ public class QuizFragment extends Fragment implements Quiz.View {
             @Override
             public void onClick(View view) {
                 presenter.stopTimer();
-//                DogameActivity dogameActivity = (DogameActivity) getActivity();
-//                if(dogameActivity != null)
-//                    dogameActivity.showFragment(R.id.activity_dogame, HomeFragment.newInstance());
+                DogameActivity dogameActivity = (DogameActivity) getActivity();
+                if(dogameActivity != null)
+                    dogameActivity.showHome();
             }
         });
 

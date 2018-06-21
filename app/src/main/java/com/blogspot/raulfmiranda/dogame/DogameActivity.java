@@ -110,12 +110,12 @@ public class DogameActivity extends BaseActivity
         return true;
     }
 
-    private void showHome() {
+    public void showHome() {
         currentScreen = HOME;
         showFragment(R.id.activity_dogame, HomeFragment.newInstance());
     }
 
-    private void showQuiz() {
+    public void showQuiz() {
         currentScreen = QUIZ;
         showFragment(R.id.activity_dogame, QuizFragment.newInstance());
     }
