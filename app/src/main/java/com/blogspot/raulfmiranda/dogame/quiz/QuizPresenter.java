@@ -1,8 +1,10 @@
 package com.blogspot.raulfmiranda.dogame.quiz;
 
+import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
 
+import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.entity.DogModel;
 
@@ -15,14 +17,16 @@ import android.os.Handler;
 class QuizPresenter implements Quiz.Presenter {
 
     private DogModel dogModel = new DogModel(this);
+    private Context context = null;
     private Quiz.View view;
     private Dog currentDog;
     private Timer timer;
-    private final int TIME_MAX = 30;
+    private final int TIME_MAX = 31;
     private int score = 0;
-    private int time = 30;
+    private int time = TIME_MAX;
 
-    public QuizPresenter(Quiz.View view) {
+    QuizPresenter(Quiz.View view, Context context) {
+        this.context = context;
         this.view = view;
     }
 
@@ -51,19 +55,27 @@ class QuizPresenter implements Quiz.Presenter {
                 checkedAnswer = checkedAnswer.replace(" ", "-");
                 checkedAnswer = checkedAnswer.replace("(A)", "");
 
-                if(checkedAnswer.equals(currentDog.getBreedSubreed()))
+                if(checkedAnswer.equals(currentDog.getBreedSubreed())) {
+                    Util.Companion.playSound(context, Util.Companion.getSOUND_POSITIVE());
                     this.score++;
-                else
+                }
+                else {
+                    Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
                     this.score = 0;
+                }
                 break;
             case SKIP:
-                if(this.score > 0)
+                if(this.score > 0) {
+                    Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
                     this.score--;
+                }
                 break;
             case TIMEOUT:
+                Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
                 this.score = 0;
                 break;
         }
+        view.blinkScore();
     }
 
     @Override

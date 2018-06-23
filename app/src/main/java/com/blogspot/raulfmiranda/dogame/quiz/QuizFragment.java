@@ -1,5 +1,6 @@
 package com.blogspot.raulfmiranda.dogame.quiz;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.blogspot.raulfmiranda.dogame.DogameActivity;
 import com.blogspot.raulfmiranda.dogame.HomeFragment;
+import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.R;
 import com.squareup.picasso.Picasso;
@@ -47,7 +51,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new QuizPresenter(this);
+        presenter = new QuizPresenter(this, getActivity());
     }
 
     @Override
@@ -86,6 +90,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
             @Override
             public void onClick(View view) {
                 presenter.stopTimer();
+
                 presenter.updateScore(QuizChoice.SKIP, null);
                 presenter.requestRandomDog();
             }
@@ -129,6 +134,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        Util.Companion.initSounds(getActivity());
         presenter.requestRandomDog();
     }
 
@@ -146,5 +152,18 @@ public class QuizFragment extends Fragment implements Quiz.View {
     @Override
     public void setTime(int time) {
         txtTime.setText(getString(R.string.time, time));
+    }
+
+    @Override
+    public void blinkScore() {
+        TextView txtView = getView().findViewById(R.id.txtScore);
+        if(txtView != null) {
+            Animation anim = new AlphaAnimation(0.0f, 1.0f);
+            anim.setDuration(50); //You can manage the blinking time with this parameter
+            anim.setStartOffset(20);
+            anim.setRepeatMode(Animation.REVERSE);
+            anim.setRepeatCount(2);
+            txtView.startAnimation(anim);
+        }
     }
 }

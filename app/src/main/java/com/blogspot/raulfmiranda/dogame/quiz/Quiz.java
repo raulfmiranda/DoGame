@@ -9,6 +9,7 @@ public interface Quiz {
     interface View {
         void randomDogSuccessfullyRetrieved(Dog dog, List<String> breeds);
         void setTime(int time);
+        void blinkScore();
     }
     interface Presenter {
         void requestRandomDog();
