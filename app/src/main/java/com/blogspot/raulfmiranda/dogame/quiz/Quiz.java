@@ -10,6 +10,8 @@ public interface Quiz {
         void randomDogSuccessfullyRetrieved(Dog dog, List<String> breeds);
         void setTime(int time);
         void blinkScore();
+        void showProgress();
+        void hideProgress();
     }
     interface Presenter {
         void requestRandomDog();

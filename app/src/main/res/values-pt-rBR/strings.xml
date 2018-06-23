@@ -17,7 +17,11 @@
     <string name="title_activity_dogame">DoGame</string>
     <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
     <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Nome do Usuário</string>
     <string name="nav_header_desc">Cabeçalho de navegação</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="answer_quiz">Responder quiz</string>
+    <string name="start">Início</string>
+    <string name="see_dogs">Ver cachorros</string>
+    <string name="exit">Sair</string>
 </resources>

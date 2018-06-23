@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -34,6 +35,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
     Button btnSkip;
     ImageButton ibtClose;
     RadioGroup rdGroup;
+    FrameLayout frmProgress;
     RadioButton checkedRdButton;
     ImageView imgView;
     TextView txtScore;
@@ -67,6 +69,9 @@ public class QuizFragment extends Fragment implements Quiz.View {
         txtScore = view.findViewById(R.id.txtScore);
         txtTime = view.findViewById(R.id.txtTime);
         rdGroup = view.findViewById(R.id.rdGroup);
+        frmProgress = view.findViewById(R.id.frameProgress);
+
+        frmProgress.setVisibility(FrameLayout.VISIBLE);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +123,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
         Picasso
                 .get()
                 .load(uriDogImage)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.dog)
                 .into(imgView);
 
         for (int i = 0; i < rdGroup.getChildCount(); i++) {
@@ -147,6 +152,8 @@ public class QuizFragment extends Fragment implements Quiz.View {
     @Override
     public void randomDogSuccessfullyRetrieved(Dog dog, List<String> randomBreeds) {
         loadScreen(dog, randomBreeds);
+        hideProgress();
+        blinkScore();
     }
 
     @Override
@@ -165,5 +172,15 @@ public class QuizFragment extends Fragment implements Quiz.View {
             anim.setRepeatCount(2);
             txtView.startAnimation(anim);
         }
+    }
+
+    @Override
+    public void showProgress() {
+        frmProgress.setVisibility(FrameLayout.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        frmProgress.setVisibility(FrameLayout.GONE);
     }
 }

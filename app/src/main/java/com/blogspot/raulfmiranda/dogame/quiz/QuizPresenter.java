@@ -30,9 +30,9 @@ class QuizPresenter implements Quiz.Presenter {
         this.view = view;
     }
 
-
     @Override
     public void requestRandomDog() {
+        view.showProgress();
         dogModel.getRandomDog();
     }
 
@@ -75,7 +75,6 @@ class QuizPresenter implements Quiz.Presenter {
                 this.score = 0;
                 break;
         }
-        view.blinkScore();
     }
 
     @Override
