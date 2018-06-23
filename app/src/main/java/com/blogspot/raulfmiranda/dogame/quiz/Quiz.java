@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface Quiz {
     interface View {
-        void randomDogSuccessfullyRetrieved(Dog dog, List<String> randomBreeds);
+        void randomDogSuccessfullyRetrieved(Dog dog, List<String> breeds);
     }
     interface Presenter {
         void requestRandomDog();
         void randomDogSuccessfullyRetrieved(Dog dog);
-        void updateScore();
+        void updateScore(String checkedAnswer);
         int getScore();
     }
 }

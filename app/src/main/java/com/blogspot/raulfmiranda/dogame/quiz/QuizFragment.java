@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.entity.Model;
@@ -24,6 +26,11 @@ import java.util.Random;
 public class QuizFragment extends Fragment implements Quiz.View {
 
     private Quiz.Presenter presenter;
+    Button btnNext;
+    RadioGroup rdGroup;
+    RadioButton checkedRdButton;
+    ImageView imgView;
+    TextView txtScore;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -45,12 +52,36 @@ public class QuizFragment extends Fragment implements Quiz.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
+        btnNext = view.findViewById(R.id.btnNext);
+        rdGroup = view.findViewById(R.id.rdGroup);
+        imgView = view.findViewById(R.id.imgDog);
+        txtScore = view.findViewById(R.id.txtHeader);
+        rdGroup = view.findViewById(R.id.rdGroup);
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int checkRdBtnId = rdGroup.getCheckedRadioButtonId();
+
+                if(checkRdBtnId == -1) {
+                    Toast.makeText(getActivity(), getString(R.string.not_checked), Toast.LENGTH_SHORT).show();
+                } else {
+                    checkedRdButton = rdGroup.findViewById(checkRdBtnId);
+                    presenter.updateScore(checkedRdButton.getText().toString());
+                    presenter.requestRandomDog();
+                }
+
+            }
+        });
+
         return view;
     }
 
-    private void loadScreen(Dog dog, List<String> randomBreeds) {
+    private void loadScreen(Dog dog, List<String> breeds) {
 
-        ImageView imgView = getView().findViewById(R.id.imgDog);
+        txtScore.setText(getString(R.string.score, presenter.getScore()));
+        rdGroup.clearCheck();
 
         Uri uriDogImage = Uri.parse(dog.getImageUrl());
         Picasso
@@ -58,11 +89,6 @@ public class QuizFragment extends Fragment implements Quiz.View {
                 .load(uriDogImage)
                 .placeholder(R.mipmap.ic_launcher)
                 .into(imgView);
-
-        RadioGroup rdGroup = getView().findViewById(R.id.rdGroup);
-        List<String> breeds = randomBreeds;
-        Random rand = new Random();
-        breeds.add(rand.nextInt(randomBreeds.size() + 1), dog.getBreedSubreed() + " (A)");
 
         for (int i = 0; i < rdGroup.getChildCount(); i++) {
             RadioButton rdButton = (RadioButton) rdGroup.getChildAt(i);
@@ -76,8 +102,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView txtScore = getView().findViewById(R.id.txtHeader);
-        txtScore.setText(getString(R.string.score, presenter.getScore()));
+
 
         presenter.requestRandomDog();
     }
