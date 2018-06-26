@@ -24,4 +24,8 @@
     <string name="start">Início</string>
     <string name="see_dogs">Ver cachorros</string>
     <string name="exit">Sair</string>
+    <string name="general">Geral</string>
+    <string name="monthly">Mensal</string>
+    <string name="weekly">Semanal</string>
+    <string name="daily">Diário</string>
 </resources>
