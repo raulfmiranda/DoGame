@@ -1,17 +1,14 @@
 package com.blogspot.raulfmiranda.dogame.login;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.blogspot.raulfmiranda.dogame.BaseFragment;
@@ -34,7 +31,7 @@ public class LoginFragment extends BaseFragment implements TextView.OnEditorActi
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.login_fragment, container, false);
+    View view = inflater.inflate(R.layout.fragment_login, container, false);
 
     view
         .findViewById(R.id.bt_login)
@@ -96,7 +93,7 @@ public class LoginFragment extends BaseFragment implements TextView.OnEditorActi
 
 
   private void tryToLogin() {
-    String email = mEmail.getText().toString();
+    String email    = mEmail.getText().toString();
     String password = mPassword.getText().toString();
 
     mEmail.setError(null);

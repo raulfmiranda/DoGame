@@ -13,6 +13,7 @@ import com.blogspot.raulfmiranda.dogame.login.exception.ConfirmException;
 import com.blogspot.raulfmiranda.dogame.login.exception.EmailException;
 import com.blogspot.raulfmiranda.dogame.login.exception.NameException;
 import com.blogspot.raulfmiranda.dogame.login.exception.PasswordException;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends BaseActivity implements OnLoginInteractionListener , Login.View {
 
@@ -28,7 +29,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.login_activity);
+    setContentView(R.layout.activity_login);
 
     if( presenter == null ){
       presenter = new LoginPresenter();
@@ -39,7 +40,11 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   @Override
   public void onStart() {
     super.onStart();
-    showLogin();
+    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+      showDoGame();
+    } else {
+      showLogin();
+    }
   }
 
   @Override
@@ -62,7 +67,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   @Override
   public void showRegister() {
     currentScreen = REGISTER;
-    fragment = RegisterFragment.newInstance();
+    fragment      = RegisterFragment.newInstance();
     showFragment(R.id.activity_login, fragment);
   }
 
@@ -93,10 +98,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
 
   @Override
   public void finishRegistration() {
-    fragment.hideProgress();
-    Snackbar
-        .make(fragment.getView(), "Cadastro efetuado com sucesso!", Snackbar.LENGTH_SHORT)
-        .show();
+    issueError("Cadastro efetuado com sucesso!");
     showLogin();
   }
 
@@ -111,7 +113,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
 
   private void showLogin() {
     currentScreen = LOGIN;
-    fragment = LoginFragment.newInstance();
+    fragment      = LoginFragment.newInstance();
     showFragment(R.id.activity_login, fragment);
   }
 }

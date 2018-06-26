@@ -1,28 +1,33 @@
 package com.blogspot.raulfmiranda.dogame.ranking;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.blogspot.raulfmiranda.dogame.BaseFragment;
 import com.blogspot.raulfmiranda.dogame.R;
+import com.blogspot.raulfmiranda.dogame.entity.User;
 
-public class BlankFragment extends Fragment {
+import java.util.List;
 
-  private static final String ARG_PARAM1 = "param1";
+public class RankingListFragment extends Fragment {
 
-  private String mParam1;
+  private static final String PARAM_TIPO_RANKING = "tipo de ranking";
 
-  public BlankFragment() {
-    // Required empty public constructor
-  }
+  private int tipoRanking;
+  private RankingAdapter adapter;
 
-  public static BlankFragment newInstance(String param1) {
-    BlankFragment fragment = new BlankFragment();
+  public static RankingListFragment newInstance(int tipoRanking) {
+    RankingListFragment fragment = new RankingListFragment();
     Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
+    args.putInt(PARAM_TIPO_RANKING, tipoRanking);
     fragment.setArguments(args);
     return fragment;
   }
@@ -31,16 +36,53 @@ public class BlankFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (getArguments() != null) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
+      tipoRanking = getArguments().getInt(PARAM_TIPO_RANKING);
     }
+    adapter = RankingAdapter.getInstance(tipoRanking);
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_ranking_list, container, false);
-    TextView textView = view.findViewById(R.id.tv2);
-    textView.setText(mParam1);
+
+    RecyclerView rvRanking = view.findViewById(R.id.rv_ranking);
+    rvRanking.addItemDecoration(new SpacesItemDecoration(6));
+    rvRanking.setHasFixedSize(true);
+    int scrollPosition = 0;
+    if (rvRanking.getLayoutManager() != null) {
+      scrollPosition = ((LinearLayoutManager) rvRanking.getLayoutManager())
+          .findFirstCompletelyVisibleItemPosition();
+    }
+    rvRanking.setLayoutManager(new LinearLayoutManager(getActivity()));
+    rvRanking.scrollToPosition(scrollPosition);
+    rvRanking.setItemAnimator(new DefaultItemAnimator());
+    rvRanking.setAdapter(adapter);
+
+//    mView        = rvRanking;
+//    mProgressBar = view.findViewById(R.id.pb_list_ranking);
+//
+//    showProgress();
+
     return view;
+  }
+
+  private class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+    private int space;
+
+    SpacesItemDecoration(int space) {
+      this.space = space;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+      outRect.left = space;
+      outRect.right = space;
+      outRect.bottom = space;
+
+      if(parent.getChildAdapterPosition(view) == 0)
+        outRect.top = space;
+
+    }
   }
 }

@@ -1,11 +1,9 @@
 package com.blogspot.raulfmiranda.dogame.login;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +32,7 @@ public class RegisterFragment extends BaseFragment implements View.OnClickListen
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.register_fragment, container, false);
+    View view = inflater.inflate(R.layout.fragment_register, container, false);
 
     view
         .findViewById(R.id.bt_register)

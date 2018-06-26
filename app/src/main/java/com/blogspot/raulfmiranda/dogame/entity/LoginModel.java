@@ -24,11 +24,13 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
 
   private Login.Presenter presenter;
   private LoginAsyncTask mAuthTask;
+  private Firebase firebase;
 
   private String userName;
 
   public LoginModel(Login.Presenter presenter) {
     this.presenter = presenter;
+    firebase       = Firebase.getInstance();
   }
 
   @Override
@@ -52,7 +54,7 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
   @Override
   public void login(String email, String password) {
     currentTask = LOGIN;
-    mAuthTask = new LoginAsyncTask(email, password);
+    mAuthTask   = new LoginAsyncTask(email, password);
     mAuthTask.execute((Void) null);
   }
 
@@ -65,15 +67,8 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
           presenter.endLoginOperation();
           break;
         case REGISTER:
-          User user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid(), userName);
-          FirebaseDatabase
-              .getInstance()
-              .getReference()
-              .child(User.TABELA)
-              .child(user.getId())
-              .setValue(user)
-              .addOnFailureListener(LoginModel.this)
-              .addOnSuccessListener(LoginModel.this);
+          User user = new User(firebase.getCurrentUser().getUid(), userName);
+          firebase.createUser(user, LoginModel.this, LoginModel.this);
           break;
       }
     } else {
@@ -109,10 +104,10 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
     protected Void doInBackground(Void... params) {
       switch (currentTask) {
         case LOGIN:
-          login(email, password);
+          firebase.login(email, password, LoginModel.this);
           break;
         case REGISTER:
-          register(email, password);
+          firebase.register(email, password, LoginModel.this);
           break;
       }
       return null;
@@ -122,20 +117,6 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
     protected void onCancelled() {
       mAuthTask = null;
       presenter.operationAborted();
-    }
-
-    private void login(String email, String password) {
-      FirebaseAuth
-          .getInstance()
-          .signInWithEmailAndPassword(email, password)
-          .addOnCompleteListener(LoginModel.this);
-    }
-
-    private void register(String email, String password) {
-      FirebaseAuth
-          .getInstance()
-          .createUserWithEmailAndPassword(email, password)
-          .addOnCompleteListener(LoginModel.this);
     }
   }
 }

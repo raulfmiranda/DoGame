@@ -1,6 +1,7 @@
 package com.blogspot.raulfmiranda.dogame;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,10 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.blogspot.raulfmiranda.dogame.entity.Firebase;
 import com.blogspot.raulfmiranda.dogame.quiz.Quiz;
 import com.blogspot.raulfmiranda.dogame.quiz.QuizFragment;
 import com.blogspot.raulfmiranda.dogame.ranking.RankingFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DogameActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,8 +56,13 @@ public class DogameActivity extends BaseActivity
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvUserName = headerView.findViewById(R.id.tv_user_name);
+        tvUserName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        TextView tvUserMail = headerView.findViewById(R.id.tv_user_mail);
+        tvUserMail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
         showHome();
-        markMenu(HOME);
     }
 
     @Override
@@ -111,6 +121,7 @@ public class DogameActivity extends BaseActivity
     }
 
     public void showHome() {
+        markMenu(HOME);
         currentScreen = HOME;
         showFragment(R.id.activity_dogame, HomeFragment.newInstance());
     }
@@ -133,9 +144,8 @@ public class DogameActivity extends BaseActivity
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     //TODO: Efetuar o logout
-                    //presenter.logout();
-                    //TODO: Exibir o login
-                    //exibirLogin();
+                    Firebase.getInstance().logout();
+                    showLogin();
                     dialogInterface.dismiss();
                 }
             })
@@ -167,5 +177,11 @@ public class DogameActivity extends BaseActivity
             default:
                 break;
         }
+    }
+
+    private void showLogin() {
+        Intent it = new Intent(DogameActivity.this, LoginActivity.class);
+        startActivity(it);
+        finish();
     }
 }

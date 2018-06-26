@@ -5,6 +5,7 @@
 
     <item
         android:id="@+id/navigation_general"
+        android:checked="true"
         android:enabled="true"
         app:showAsAction="ifRoom"
         android:title="Geral"/>
