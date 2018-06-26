@@ -9,8 +9,8 @@
     <string name="register">Cadastrar</string>
     <string name="action_settings">Configurações</string>
     <string name="question">Qual a raça do cachorro da imagem acima?</string>
-    <string name="score">Pontuação: %1$d</string>
-    <string name="time">Tempo: %1$d seg</string>
+    <string name="score">%1$d</string>
+    <string name="time">%1$d seg</string>
     <string name="app_name">DoGame</string>
     <string name="e_mail">E-mail</string>
     <string name="title_activity_dogame">DoGame</string>
