@@ -1,9 +1,8 @@
 package com.blogspot.raulfmiranda.dogame.entity;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.blogspot.raulfmiranda.dogame.ProjectConstants;
+import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.remote.DogAPI;
 import com.blogspot.raulfmiranda.dogame.quiz.Quiz;
 
@@ -18,7 +17,7 @@ import retrofit2.Response;
 
 public class DogModel implements Callback<DogResponse> {
 
-    private String TAG = ProjectConstants.Companion.getTAG();
+    private String TAG = Util.Companion.getTAG();
     private DogAPI.Companion dogAPI = DogAPI.Companion;
     private Quiz.Presenter presenter;
 

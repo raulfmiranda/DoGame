@@ -1,28 +1,30 @@
 <resources>
+    <string name="next">Próxima</string>
+    <string name="skip">Pular</string>
+    <string name="not_checked">Escolha uma opção.</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="signup">Cadastrar-se</string>
+    <string name="confirm_password">Confirma senha</string>
+    <string name="register">Cadastrar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="question">Qual a raça do cachorro da imagem acima?</string>
+    <string name="score">Pontuação: %1$d</string>
+    <string name="time">Tempo: %1$d seg</string>
     <string name="app_name">DoGame</string>
     <string name="e_mail">E-mail</string>
-    <string name="password">Password</string>
-    <string name="login">LogIn</string>
-    <string name="signup">SignUp</string>
-    <string name="confirm_password">Confirm password</string>
-    <string name="register">Register</string>
-    <string name="title_activity_dogame">DogameActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="title_activity_dogame">DoGame</string>
+    <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
+    <string name="nav_header_title">Nome do Usuário</string>
+    <string name="nav_header_desc">Cabeçalho de navegação</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="question">What is the breed of dog in the picture above?</string>
-    <string name="next">Next</string>
-    <string name="skip">Skip</string>
-    <string name="score">Score: %1$d</string>
+    <string name="play">Jogar</string>
+    <string name="welcome">Bem-vindo(a) ao DoGame!\nAqui você pode jogar um Quiz sobre raças de cachorros ou pode apenas conhecê-las melhor na área de estudos.\nAcesse todas as funcionalidades pelo menu no canto superior esquerdo ou clique no botão a seguir caso queira logo se desafiar!</string>
+    <string name="answer_quiz">Responder quiz</string>
+    <string name="start">Início</string>
+    <string name="ranking">Ranking</string>
+    <string name="see_dogs">Ver cachorros</string>
+    <string name="exit">Sair</string>
 </resources>
-
-<!--<string name="password">Senha</string>-->
-<!--<string name="login">Entrar</string>-->
-<!--<string name="signup">Cadastrar-se</string>-->
-<!--<string name="confirm_password">Confirma password</string>-->
-<!--<string name="register">Cadastrar</string>-->
-<!--<string name="action_settings">Configurações</string>-->
 

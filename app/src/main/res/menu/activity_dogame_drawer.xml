@@ -6,18 +6,18 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="Início" />
+            android:title="@string/start" />
         <item
             android:id="@+id/nav_quiz"
-            android:title="Responder quiz" />
+            android:title="@string/answer_quiz" />
         <item
             android:id="@+id/nav_ranking"
-            android:title="Ranking" />
+            android:title="@string/ranking" />
         <item
             android:id="@+id/nav_list_dog"
-            android:title="Ver cachorros" />
+            android:title="@string/see_dogs" />
         <item
             android:id="@+id/nav_logout"
-            android:title="Sair" />
+            android:title="@string/exit" />
     </group>
 </menu>

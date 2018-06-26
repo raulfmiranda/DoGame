@@ -9,7 +9,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   private Fragment fragment;
 
-  protected void showFragment(int activity, Fragment fragment) {
+//  protected void showFragment(int activity, Fragment fragment) {
+  public void showFragment(int activity, Fragment fragment) {
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction ft = fm.beginTransaction();
     if (this.fragment != null) {
