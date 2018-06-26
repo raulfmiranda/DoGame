@@ -58,9 +58,9 @@ public class DogameActivity extends BaseActivity
 
         View headerView = navigationView.getHeaderView(0);
         TextView tvUserName = headerView.findViewById(R.id.tv_user_name);
-        tvUserName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        tvUserName.setText(Firebase.getInstance().getCurrentUser().getDisplayName());
         TextView tvUserMail = headerView.findViewById(R.id.tv_user_mail);
-        tvUserMail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        tvUserMail.setText(Firebase.getInstance().getCurrentUser().getEmail());
 
         showHome();
     }

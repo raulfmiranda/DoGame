@@ -1,10 +1,14 @@
 package com.blogspot.raulfmiranda.dogame.ranking;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.blogspot.raulfmiranda.dogame.entity.Model;
 import com.blogspot.raulfmiranda.dogame.entity.RankingModel;
 import com.blogspot.raulfmiranda.dogame.entity.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -32,8 +36,10 @@ class RankingPresenter implements Ranking.Presenter {
     model.requestUsers();
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.N)
   @Override
   public void setUsers(List<User> users) {
+    Calendar today = Calendar.getInstance();
     TreeMap<Integer, List<User>> mapGeneralRanking = new TreeMap<>();
     TreeMap<Integer, List<User>> mapMonthlyRanking = new TreeMap<>();
     TreeMap<Integer, List<User>> mapWeeklyRanking = new TreeMap<>();
@@ -41,10 +47,16 @@ class RankingPresenter implements Ranking.Presenter {
     for (User user : users) {
       Integer score = user.getScore();
       addRanking(mapGeneralRanking, user, score);
+      if (user.getMonth() != today.get(Calendar.MONTH) + 1)
+        continue;
       score = user.getScoreMonth();
       addRanking(mapMonthlyRanking, user, score);
+      if (user.getWeek() != today.get(Calendar.WEEK_OF_YEAR))
+        continue;
       score = user.getScoreWeek();
       addRanking(mapWeeklyRanking, user, score);
+      if (user.getDay() != today.get(Calendar.DAY_OF_YEAR))
+        continue;
       score = user.getScoreDay();
       addRanking(mapDailyRanking, user, score);
     }
