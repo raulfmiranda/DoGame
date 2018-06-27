@@ -143,7 +143,6 @@ public class DogameActivity extends BaseActivity
             .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //TODO: Efetuar o logout
                     Firebase.getInstance().logout();
                     showLogin();
                     dialogInterface.dismiss();
