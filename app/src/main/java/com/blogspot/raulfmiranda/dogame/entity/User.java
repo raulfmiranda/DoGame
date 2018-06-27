@@ -31,21 +31,38 @@ public class User {
         score = 0;
     }
 
-    public void incrementScore(int increment) {
+    public void increaseScore(int increase) {
         Calendar today = Calendar.getInstance();
-        score += increment;
+        score += increase;
         if (month != today.get(Calendar.MONTH) + 1) {
             scoreMonth = 0;
         }
-        scoreMonth += increment;
+        scoreMonth += increase;
         if (week != today.get(Calendar.WEEK_OF_YEAR)) {
             scoreWeek = 0;
         }
-        scoreWeek += increment;
+        scoreWeek += increase;
         if (day != today.get(Calendar.DAY_OF_YEAR)) {
             scoreDay = 0;
         }
-        scoreDay += increment;
+        scoreDay += increase;
+    }
+
+    public void decreaseScore(int decrease) {
+        Calendar today = Calendar.getInstance();
+        score -= decrease;
+        if (month != today.get(Calendar.MONTH) + 1) {
+            scoreMonth = 0;
+        }
+        scoreMonth -= decrease;
+        if (week != today.get(Calendar.WEEK_OF_YEAR)) {
+            scoreWeek = 0;
+        }
+        scoreWeek -= decrease;
+        if (day != today.get(Calendar.DAY_OF_YEAR)) {
+            scoreDay = 0;
+        }
+        scoreDay -= decrease;
     }
 
     public String getId() {

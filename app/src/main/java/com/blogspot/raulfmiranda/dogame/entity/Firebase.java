@@ -76,8 +76,18 @@ public class Firebase implements  ValueEventListener {
         .addListenerForSingleValueEvent(listener);
   }
 
-  public void incrementScore(int increment) {
-    user.incrementScore(increment);
+  public void increaseScore(int increase) {
+    user.increaseScore(increase);
+    database
+        .getReference()
+        .child("users")
+        .child(user.getId())
+        .setValue(user);
+
+  }
+
+  public void decreaseScore(int decrement) {
+    user.decreaseScore(decrement);
     database
         .getReference()
         .child("users")
@@ -96,9 +106,7 @@ public class Firebase implements  ValueEventListener {
 
   @Override
   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-    for (DataSnapshot child : dataSnapshot.getChildren()) {
-      user =child.getValue(User.class);
-    }
+    user = dataSnapshot.getValue(User.class);
   }
 
   @Override
