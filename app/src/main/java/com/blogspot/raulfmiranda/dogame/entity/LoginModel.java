@@ -63,12 +63,12 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
     if (task.isSuccessful()) {
       switch (currentTask) {
         case LOGIN:
+          firebase.loadUser();
           mAuthTask = null;
           presenter.endLoginOperation();
           break;
         case REGISTER:
-          User user = new User(firebase.getCurrentUser().getUid(), userName);
-          firebase.createUser(user, LoginModel.this, LoginModel.this);
+          firebase.createUser(userName, LoginModel.this, LoginModel.this);
           break;
       }
     } else {

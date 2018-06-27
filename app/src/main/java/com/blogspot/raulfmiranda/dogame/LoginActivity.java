@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
+import com.blogspot.raulfmiranda.dogame.entity.Firebase;
 import com.blogspot.raulfmiranda.dogame.login.Login;
 import com.blogspot.raulfmiranda.dogame.login.LoginFragment;
 import com.blogspot.raulfmiranda.dogame.login.LoginPresenter;
@@ -40,7 +41,8 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   @Override
   public void onStart() {
     super.onStart();
-    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+    if (Firebase.getInstance().getCurrentUser() != null) {
+      Firebase.getInstance().loadUser();
       showDoGame();
     } else {
       showLogin();

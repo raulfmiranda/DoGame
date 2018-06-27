@@ -1,6 +1,12 @@
 package com.blogspot.raulfmiranda.dogame.entity;
 
+import com.blogspot.raulfmiranda.dogame.ranking.Ranking;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class User {
 
@@ -23,6 +29,23 @@ public class User {
         this.id = id;
         this.name = name;
         score = 0;
+    }
+
+    public void incrementScore(int increment) {
+        Calendar today = Calendar.getInstance();
+        score += increment;
+        if (month != today.get(Calendar.MONTH) + 1) {
+            scoreMonth = 0;
+        }
+        scoreMonth += increment;
+        if (week != today.get(Calendar.WEEK_OF_YEAR)) {
+            scoreWeek = 0;
+        }
+        scoreWeek += increment;
+        if (day != today.get(Calendar.DAY_OF_YEAR)) {
+            scoreDay = 0;
+        }
+        scoreDay += increment;
     }
 
     public String getId() {
