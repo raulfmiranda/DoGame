@@ -3,36 +3,29 @@ package com.blogspot.raulfmiranda.dogame;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.blogspot.raulfmiranda.dogame.entity.Firebase;
-import com.blogspot.raulfmiranda.dogame.quiz.Quiz;
 import com.blogspot.raulfmiranda.dogame.quiz.QuizFragment;
 import com.blogspot.raulfmiranda.dogame.ranking.RankingFragment;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.blogspot.raulfmiranda.dogame.viewdog.ViewDogFragment;
 
 public class DogameActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int HOME    = 1;
-    private static final int QUIZ    = 2;
-    private static final int RANKING = 3;
-    private static final int LIST    = 4;
+    private static final int HOME     = 1;
+    private static final int QUIZ     = 2;
+    private static final int RANKING  = 3;
+    private static final int VIEW_DOG = 4;
 
     private int currentScreen;
 
@@ -110,8 +103,8 @@ public class DogameActivity extends BaseActivity
         } else if (id == R.id.nav_ranking) {
             if (currentScreen != RANKING)
                 showRanking();
-        } else if (id == R.id.nav_list_dog) {
-
+        } else if (id == R.id.nav_view_dog) {
+                showViewDog();
         } else if (id == R.id.nav_logout) {
             logout();
         }
@@ -119,6 +112,12 @@ public class DogameActivity extends BaseActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showViewDog() {
+        markMenu(VIEW_DOG);
+        currentScreen = VIEW_DOG;
+        showFragment(R.id.activity_dogame, ViewDogFragment.newInstance());
     }
 
     public void showHome() {
@@ -171,8 +170,8 @@ public class DogameActivity extends BaseActivity
             case RANKING:
                 navigationView.setCheckedItem(R.id.nav_ranking);
                 break;
-            case LIST:
-                navigationView.setCheckedItem(R.id.nav_list_dog);
+            case VIEW_DOG:
+                navigationView.setCheckedItem(R.id.nav_view_dog);
                 break;
             default:
                 break;

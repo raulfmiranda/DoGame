@@ -4,7 +4,7 @@ import com.blogspot.raulfmiranda.dogame.entity.User;
 
 import java.util.List;
 
-public interface Ranking {;
+public interface Ranking {
     int GENERAL_RANKING = 0;
     int MONTHLY_RANKING = 1;
     int WEEKLY_RANKING = 2;

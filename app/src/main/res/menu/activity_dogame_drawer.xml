@@ -14,7 +14,7 @@
             android:id="@+id/nav_ranking"
             android:title="@string/ranking" />
         <item
-            android:id="@+id/nav_list_dog"
+            android:id="@+id/nav_view_dog"
             android:title="@string/see_dogs" />
         <item
             android:id="@+id/nav_logout"
