@@ -12,30 +12,30 @@ import java.util.List;
 
 public class RankingModel implements Ranking.Model, ValueEventListener {
 
-  private Firebase firebase;
-  private Ranking.Presenter presenter;
+    private Firebase firebase;
+    private Ranking.Presenter presenter;
 
-  public RankingModel(Ranking.Presenter presenter) {
-    firebase = Firebase.getInstance();
-    this.presenter = presenter;
-  }
-
-  @Override
-  public void requestUsers() {
-    firebase.requestUsers(this);
-  }
-
-  @Override
-  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-    List<User> listUser = new ArrayList<>();
-    for (DataSnapshot child : dataSnapshot.getChildren()) {
-      listUser.add(child.getValue(User.class));
+    public RankingModel(Ranking.Presenter presenter) {
+        firebase = Firebase.getInstance();
+        this.presenter = presenter;
     }
-    presenter.setUsers(listUser);
-  }
 
-  @Override
-  public void onCancelled(@NonNull DatabaseError databaseError) {
+    @Override
+    public void requestUsers() {
+        firebase.requestUsers(this);
+    }
 
-  }
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        List<User> listUser = new ArrayList<>();
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            listUser.add(child.getValue(User.class));
+        }
+        presenter.setUsers(listUser);
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
 }

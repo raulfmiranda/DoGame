@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.remote.DogAPI;
-import com.blogspot.raulfmiranda.dogame.quiz.Quiz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,14 +18,22 @@ public class DogModel implements Callback<DogResponse> {
 
     private String TAG = Util.Companion.getTAG();
     private DogAPI.Companion dogAPI = DogAPI.Companion;
-    private Quiz.Presenter presenter;
+    private DogModelListener listener;
 
-    public DogModel(Quiz.Presenter presenter) {
-        this.presenter = presenter;
+    public DogModel(DogModelListener dogModelListener) {
+        this.listener = dogModelListener;
     }
 
     public void getRandomDog() {
         dogAPI.getRandomDogResponse(this);
+    }
+
+    public void getRandomDogResponseByBreed(String breed) {
+        dogAPI.getRandomDogResponseByBreed(this, breed);
+    }
+
+    public void getRandomDogResponseBySubBreed(String breed, String subBreed) {
+        dogAPI.getRandomDogResponseBySubBreed(this, breed, subBreed);
     }
 
     public List<String> getFourRandomBreeds(String excludedBreed) {
@@ -52,7 +59,7 @@ public class DogModel implements Callback<DogResponse> {
         if(response.body() != null && response.body().getStatus().equals("success")) {
             DogResponse dogResponse = new DogResponse(response.body().getStatus(), response.body().getImageUrl());
             Dog dog = dogResponse.toDog();
-            presenter.randomDogSuccessfullyRetrieved(dog);
+            listener.randomDogSuccessfullyRetrieved(dog);
         }
     }
 

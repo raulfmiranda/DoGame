@@ -37,5 +37,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_breed">pesquisar raça</string>
+    <string name="choose_breed">Escolha uma raça:</string>
 </resources>
 

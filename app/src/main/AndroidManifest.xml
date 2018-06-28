@@ -13,6 +13,7 @@
         <activity
             android:name=".DogameActivity"
             android:label="@string/title_activity_dogame"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!--<intent-filter>
@@ -22,7 +23,7 @@
             </intent-filter>-->
 
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -37,6 +37,30 @@ class DogAPI {
                 e.printStackTrace()
             }
         }
+
+        //      https://dog.ceo/api/breed/{breed}/images/random
+        fun getRandomDogResponseByBreed(callback: Callback<DogResponse?>, breed: String) {
+            try {
+                val call = RetrofitInitializer(baseUrl).dogResponseService().getRandomDogResponseByBreed(breed)
+                call.enqueue(callback)
+
+            } catch (e: Exception) {
+                Log.d(TAG, e.message)
+                e.printStackTrace()
+            }
+        }
+
+        //      https://dog.ceo/api/breed/{breed}/{subreed}/images/random
+        fun getRandomDogResponseBySubBreed(callback: Callback<DogResponse?>, breed: String, subBreed: String) {
+            try {
+                val call = RetrofitInitializer(baseUrl).dogResponseService().getRandomDogResponseBySubBreed(breed, subBreed)
+                call.enqueue(callback)
+
+            } catch (e: Exception) {
+                Log.d(TAG, e.message)
+                e.printStackTrace()
+            }
+        }
     }
 
 }

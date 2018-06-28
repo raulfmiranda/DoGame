@@ -28,4 +28,6 @@
     <string name="monthly">Mensal</string>
     <string name="weekly">Semanal</string>
     <string name="daily">Diário</string>
+    <string name="search_breed">pesquisar raça</string>
+    <string name="choose_breed">Escolha uma raça:</string>
 </resources>

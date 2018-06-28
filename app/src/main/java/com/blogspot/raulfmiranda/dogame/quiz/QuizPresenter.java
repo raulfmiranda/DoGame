@@ -7,6 +7,7 @@ import android.util.Log;
 import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.entity.DogModel;
+import com.blogspot.raulfmiranda.dogame.entity.DogModelListener;
 
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
-class QuizPresenter implements Quiz.Presenter {
+import org.jetbrains.annotations.NotNull;
+
+class QuizPresenter implements Quiz.Presenter, DogModelListener {
 
     private DogModel dogModel = new DogModel(this);
     private Context context = null;
@@ -118,5 +121,15 @@ class QuizPresenter implements Quiz.Presenter {
             updateScore(QuizChoice.TIMEOUT, null);
             requestRandomDog();
         }
+    }
+
+    @Override
+    public void requestRandomDogByBreed(@NotNull String breed) {
+
+    }
+
+    @Override
+    public void requestRandomDogBySubBreed(@NotNull String breed, @NotNull String subBreed) {
+
     }
 }

@@ -1,9 +1,13 @@
-package com.blogspot.raulfmiranda.dogame;
+package com.blogspot.raulfmiranda.dogame.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
+import com.blogspot.raulfmiranda.dogame.BaseActivity;
+import com.blogspot.raulfmiranda.dogame.BaseFragment;
+import com.blogspot.raulfmiranda.dogame.DogameActivity;
+import com.blogspot.raulfmiranda.dogame.R;
 import com.blogspot.raulfmiranda.dogame.entity.Firebase;
 import com.blogspot.raulfmiranda.dogame.login.Login;
 import com.blogspot.raulfmiranda.dogame.login.LoginFragment;
