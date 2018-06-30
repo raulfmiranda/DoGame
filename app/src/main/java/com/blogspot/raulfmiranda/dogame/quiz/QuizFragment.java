@@ -128,6 +128,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
                 .into(imgView, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
+                        presenter.startTimer();
                         hideProgress();
                         blinkScore();
                     }
@@ -146,7 +147,6 @@ public class QuizFragment extends Fragment implements Quiz.View {
             breed = breed.replace("-", " ");
             rdButton.setText(breed);
         }
-        presenter.startTimer();
     }
 
     @Override
