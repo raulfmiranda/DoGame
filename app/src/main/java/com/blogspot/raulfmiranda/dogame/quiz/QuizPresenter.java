@@ -61,7 +61,6 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
                 checkedAnswer = checkedAnswer.replace("(A)", "");
 
                 if(checkedAnswer.equals(currentDog.getBreedSubreed())) {
-                    Firebase.getInstance().increaseScore(1);
                     Util.Companion.playSound(context, Util.Companion.getSOUND_POSITIVE());
                     this.score++;
                 }
@@ -73,8 +72,7 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
                 break;
             case SKIP:
                 if(this.score > 0) {
-                    Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-//                    this.score--;
+//                    Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
                 }
                 break;
             case TIMEOUT:

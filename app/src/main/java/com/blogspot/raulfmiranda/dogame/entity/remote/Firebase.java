@@ -47,7 +47,6 @@ public class Firebase {
   }
 
   public void logout() {
-    user = null;
     auth.signOut();
   }
 
