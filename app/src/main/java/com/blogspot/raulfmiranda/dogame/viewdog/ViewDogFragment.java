@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blogspot.raulfmiranda.dogame.R;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
@@ -31,6 +33,7 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
 //    private RecyclerView mRecyclerView;
     private Spinner spnBreeds;
     private ImageView imgDogSearch;
+    private FrameLayout frmViewDogProgress;
     private List<Breed> breeds;
 
     public ViewDogFragment() {
@@ -51,6 +54,8 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
 //        mRecyclerView = view.findViewById(R.id.rv_view_dog);
         spnBreeds = view.findViewById(R.id.spnBreeds);
         imgDogSearch = view.findViewById(R.id.imgDogSearch);
+        frmViewDogProgress = view.findViewById(R.id.frmViewDogProgress);
+        frmViewDogProgress.setVisibility(FrameLayout.VISIBLE);
 
         spnBreeds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -108,17 +113,29 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
                 .get()
                 .load(uriDogImage)
                 .placeholder(R.drawable.dog)
-                .into(imgDogSearch);
+                .into(imgDogSearch, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        hideProgress();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        hideProgress();
+                        String imgErroMsg = getString(R.string.erro_dog_image);
+                        Toast.makeText(getContext(), imgErroMsg, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
     public void showProgress() {
-
+        frmViewDogProgress.setVisibility(FrameLayout.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        frmViewDogProgress.setVisibility(FrameLayout.GONE);
     }
 
     private void loadSpinner(List<String> breedSubreeds) {
