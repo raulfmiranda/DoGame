@@ -117,35 +117,37 @@ public class QuizFragment extends Fragment implements Quiz.View {
 
     private void loadScreen(Dog dog, List<String> breeds) {
 
-        txtScore.setText(getString(R.string.score, presenter.getScore()));
-        rdGroup.clearCheck();
+        if (isAdded()) {
+            txtScore.setText(getString(R.string.score, presenter.getScore()));
+            rdGroup.clearCheck();
 
-        Uri uriDogImage = Uri.parse(dog.getImageUrl());
-        Picasso
-                .get()
-                .load(uriDogImage)
-                .placeholder(R.drawable.dog)
-                .into(imgView, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        presenter.startTimer();
-                        hideProgress();
-                        blinkScore();
-                    }
+            Uri uriDogImage = Uri.parse(dog.getImageUrl());
+            Picasso
+                    .get()
+                    .load(uriDogImage)
+                    .placeholder(R.drawable.dog)
+                    .into(imgView, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            presenter.startTimer();
+                            hideProgress();
+                            blinkScore();
+                        }
 
-                    @Override
-                    public void onError(Exception e) {
-                        hideProgress();
-                        String erroMsg = getString(R.string.erro_dog_image);
-                        Toast.makeText(getContext(), erroMsg, Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onError(Exception e) {
+                            hideProgress();
+                            String erroMsg = getString(R.string.erro_dog_image);
+                            Toast.makeText(getContext(), erroMsg, Toast.LENGTH_LONG).show();
+                        }
+                    });
 
-        for (int i = 0; i < rdGroup.getChildCount(); i++) {
-            RadioButton rdButton = (RadioButton) rdGroup.getChildAt(i);
-            String breed = breeds.get(i);
-            breed = breed.replace("-", " ");
-            rdButton.setText(breed);
+            for (int i = 0; i < rdGroup.getChildCount(); i++) {
+                RadioButton rdButton = (RadioButton) rdGroup.getChildAt(i);
+                String breed = breeds.get(i);
+                breed = breed.replace("-", " ");
+                rdButton.setText(breed);
+            }
         }
     }
 
@@ -176,19 +178,23 @@ public class QuizFragment extends Fragment implements Quiz.View {
 
     @Override
     public void setTime(int time) {
-        txtTime.setText(getString(R.string.time, time));
+        if (isAdded()) {
+            txtTime.setText(getString(R.string.time, time));
+        }
     }
 
     @Override
     public void blinkScore() {
-        TextView txtView = getView().findViewById(R.id.txtScore);
-        if(txtView != null) {
-            Animation anim = new AlphaAnimation(0.0f, 1.0f);
-            anim.setDuration(50); //You can manage the blinking time with this parameter
-            anim.setStartOffset(20);
-            anim.setRepeatMode(Animation.REVERSE);
-            anim.setRepeatCount(2);
-            txtView.startAnimation(anim);
+        if (isAdded()) {
+            TextView txtView = getView().findViewById(R.id.txtScore);
+            if(txtView != null) {
+                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                anim.setDuration(50); //You can manage the blinking time with this parameter
+                anim.setStartOffset(20);
+                anim.setRepeatMode(Animation.REVERSE);
+                anim.setRepeatCount(2);
+                txtView.startAnimation(anim);
+            }
         }
     }
 
