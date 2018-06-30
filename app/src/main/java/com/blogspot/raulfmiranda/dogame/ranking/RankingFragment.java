@@ -46,23 +46,23 @@ public class RankingFragment extends Fragment implements Ranking.View {
     @Override
     public void rankingLoaded() {
         typeRankings
-            .add(new TypeRanking(
-                "Geral",
+            .add(new TypeRanking(Ranking.GENERAL_RANKING,
+                getString(R.string.general),
                 presenter.requestRanking(Ranking.GENERAL_RANKING)
             ));
         typeRankings
-            .add(new TypeRanking(
-                "Mensal",
+            .add(new TypeRanking(Ranking.MONTHLY_RANKING,
+                getString(R.string.monthly),
                 presenter.requestRanking(Ranking.MONTHLY_RANKING)
             ));
         typeRankings
-            .add(new TypeRanking(
-                "Semanal",
+            .add(new TypeRanking(Ranking.WEEKLY_RANKING,
+                getString(R.string.weekly),
                 presenter.requestRanking(Ranking.WEEKLY_RANKING)
             ));
         typeRankings
-            .add(new TypeRanking(
-                "Diário",
+            .add(new TypeRanking(Ranking.DAILY_RANKING,
+                getString(R.string.daily),
                 presenter.requestRanking(Ranking.DAILY_RANKING)
             ));
         mAdapter = new RankingAdapter(typeRankings);

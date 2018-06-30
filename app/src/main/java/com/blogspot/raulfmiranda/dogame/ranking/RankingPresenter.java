@@ -44,17 +44,19 @@ class RankingPresenter implements Ranking.Presenter {
         TreeMap<Integer, List<User>> mapWeeklyRanking = new TreeMap<>();
         TreeMap<Integer, List<User>> mapDailyRanking = new TreeMap<>();
         for (User user : users) {
+            if (user.getScore() == 0)
+                continue;
             Integer score = user.getScore();
             addRanking(mapGeneralRanking, user, score);
-            if (user.getMonth() != today.get(Calendar.MONTH) + 1)
+            if (user.getScoreMonth() == 0 || (user.getMonth() != today.get(Calendar.MONTH) + 1))
                 continue;
             score = user.getScoreMonth();
             addRanking(mapMonthlyRanking, user, score);
-            if (user.getWeek() != today.get(Calendar.WEEK_OF_YEAR))
+            if (user.getScoreWeek() == 0 || (user.getWeek() != today.get(Calendar.WEEK_OF_YEAR)))
                 continue;
             score = user.getScoreWeek();
             addRanking(mapWeeklyRanking, user, score);
-            if (user.getDay() != today.get(Calendar.DAY_OF_YEAR))
+            if (user.getScoreDay() == 0 || (user.getDay() != today.get(Calendar.DAY_OF_YEAR)))
                 continue;
             score = user.getScoreDay();
             addRanking(mapDailyRanking, user, score);

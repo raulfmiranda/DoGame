@@ -96,7 +96,7 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
 
     @Override
     public void pushScore() {
-        Firebase.getInstance().getUser().increaseScore(this.score - this.startScore);
+        Firebase.getInstance().increaseScore(this.score - this.startScore);
     }
 
     @Override

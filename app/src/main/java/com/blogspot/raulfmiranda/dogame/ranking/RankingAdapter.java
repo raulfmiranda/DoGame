@@ -34,7 +34,8 @@ public class RankingAdapter extends ExpandableRecyclerViewAdapter<RankingViewHol
   @Override
   public void onBindChildViewHolder(UserViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
     User user = (User) group.getItems().get(childIndex);
-    holder.setItemUser(flatPosition, childIndex, user);
+    TypeRanking typeRanking = (TypeRanking) group;
+    holder.setItemUser(typeRanking.getRealPosition(), childIndex, user);
   }
 
   @Override

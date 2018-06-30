@@ -82,7 +82,19 @@ public class Firebase {
         .getReference()
         .child("users")
         .child(user.getId())
-        .setValue(user);
+        .setValue(user)
+            .addOnFailureListener(new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                int a = 1;
+              }
+            })
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+              @Override
+              public void onSuccess(Void aVoid) {
+                int a = 1;
+              }
+            });
 
   }
 
