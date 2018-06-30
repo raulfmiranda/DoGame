@@ -91,7 +91,7 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
   @Override
   public void onSuccess(Void aVoid) {
     mAuthTask = null;
-    presenter.endRegistrationOperation();
+    firebase.loadUser(this);
   }
 
 
@@ -99,7 +99,7 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
   @Override
   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
     firebase.setUser(dataSnapshot.getValue(User.class));
-    presenter.endLoginOperation();
+    presenter.endOperation();
   }
 
   @Override

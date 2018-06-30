@@ -66,13 +66,8 @@ public class LoginPresenter implements Login.Presenter {
   }
 
   @Override
-  public void endLoginOperation() {
+  public void endOperation() {
     view.showDoGame();
-  }
-
-  @Override
-  public void endRegistrationOperation() {
-    view.finishRegistration();
   }
 
   @Override

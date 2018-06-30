@@ -21,8 +21,7 @@ public interface Login {
     void login(String email, String password)
         throws EmailException, PasswordException;
     void operationAborted();
-    void endLoginOperation();
-    void endRegistrationOperation();
+    void endOperation();
     void issueError(String message);
     void startLogin();
   }
