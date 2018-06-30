@@ -3,19 +3,20 @@ package com.blogspot.raulfmiranda.dogame.entity;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.blogspot.raulfmiranda.dogame.entity.remote.Firebase;
 import com.blogspot.raulfmiranda.dogame.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, OnFailureListener, OnSuccessListener<Void> {
+public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, OnFailureListener, OnSuccessListener<Void>, ValueEventListener {
 
   private static final int LOGIN = 1;
   private static final int REGISTER = 2;
@@ -52,6 +53,11 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
   }
 
   @Override
+  public void loadUser() {
+    firebase.loadUser(this);
+  }
+
+  @Override
   public void login(String email, String password) {
     currentTask = LOGIN;
     mAuthTask   = new LoginAsyncTask(email, password);
@@ -63,9 +69,8 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
     if (task.isSuccessful()) {
       switch (currentTask) {
         case LOGIN:
-          firebase.loadUser();
+          firebase.loadUser(this);
           mAuthTask = null;
-          presenter.endLoginOperation();
           break;
         case REGISTER:
           firebase.createUser(userName, LoginModel.this, LoginModel.this);
@@ -87,6 +92,19 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
   public void onSuccess(Void aVoid) {
     mAuthTask = null;
     presenter.endRegistrationOperation();
+  }
+
+
+
+  @Override
+  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    firebase.setUser(dataSnapshot.getValue(User.class));
+    presenter.endLoginOperation();
+  }
+
+  @Override
+  public void onCancelled(@NonNull DatabaseError databaseError) {
+
   }
 
 

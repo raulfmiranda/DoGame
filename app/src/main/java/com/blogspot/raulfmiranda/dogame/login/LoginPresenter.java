@@ -52,8 +52,12 @@ public class LoginPresenter implements Login.Presenter {
     validatePassword(password);
 
     view.showProgress();
-
     model.login(email, password);
+  }
+
+  @Override
+  public void startLogin() {
+      model.loadUser();
   }
 
   @Override

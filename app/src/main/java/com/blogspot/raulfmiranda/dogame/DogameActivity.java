@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.blogspot.raulfmiranda.dogame.entity.Firebase;
+import com.blogspot.raulfmiranda.dogame.entity.remote.Firebase;
 import com.blogspot.raulfmiranda.dogame.login.LoginActivity;
 import com.blogspot.raulfmiranda.dogame.quiz.QuizFragment;
 import com.blogspot.raulfmiranda.dogame.ranking.RankingFragment;

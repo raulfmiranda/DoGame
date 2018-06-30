@@ -24,6 +24,7 @@ public interface Login {
     void endLoginOperation();
     void endRegistrationOperation();
     void issueError(String message);
+    void startLogin();
   }
 
   interface Model {
@@ -31,5 +32,6 @@ public interface Login {
     boolean registrationInProgress();
     void login(String email, String password);
     boolean loginInProgress();
+    void loadUser();
   }
 }

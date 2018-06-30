@@ -35,14 +35,17 @@ public class User {
         Calendar today = Calendar.getInstance();
         score += increase;
         if (month != today.get(Calendar.MONTH) + 1) {
+            month = today.get(Calendar.MONTH) + 1;
             scoreMonth = 0;
         }
         scoreMonth += increase;
         if (week != today.get(Calendar.WEEK_OF_YEAR)) {
+            week = today.get(Calendar.WEEK_OF_YEAR);
             scoreWeek = 0;
         }
         scoreWeek += increase;
         if (day != today.get(Calendar.DAY_OF_YEAR)) {
+            day = today.get(Calendar.DAY_OF_YEAR);
             scoreDay = 0;
         }
         scoreDay += increase;
@@ -52,14 +55,17 @@ public class User {
         Calendar today = Calendar.getInstance();
         score -= decrease;
         if (month != today.get(Calendar.MONTH) + 1) {
+            month = today.get(Calendar.MONTH) + 1;
             scoreMonth = 0;
         }
         scoreMonth -= decrease;
         if (week != today.get(Calendar.WEEK_OF_YEAR)) {
+            week = today.get(Calendar.WEEK_OF_YEAR);
             scoreWeek = 0;
         }
         scoreWeek -= decrease;
         if (day != today.get(Calendar.DAY_OF_YEAR)) {
+            day = today.get(Calendar.DAY_OF_YEAR);
             scoreDay = 0;
         }
         scoreDay -= decrease;
@@ -85,56 +91,28 @@ public class User {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public int getMonth() {
         return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
     }
 
     public int getScoreMonth() {
         return scoreMonth;
     }
 
-    public void setScoreMonth(int scoreMonth) {
-        this.scoreMonth = scoreMonth;
-    }
-
     public int getWeek() {
         return week;
-    }
-
-    public void setWeek(int week) {
-        this.week = week;
     }
 
     public int getScoreWeek() {
         return scoreWeek;
     }
 
-    public void setScoreWeek(int scoreWeek) {
-        this.scoreWeek = scoreWeek;
-    }
-
     public int getDay() {
         return day;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
     public int getScoreDay() {
         return scoreDay;
-    }
-
-    public void setScoreDay(int scoreDay) {
-        this.scoreDay = scoreDay;
     }
 
     @Override

@@ -8,17 +8,11 @@ import com.blogspot.raulfmiranda.dogame.BaseActivity;
 import com.blogspot.raulfmiranda.dogame.BaseFragment;
 import com.blogspot.raulfmiranda.dogame.DogameActivity;
 import com.blogspot.raulfmiranda.dogame.R;
-import com.blogspot.raulfmiranda.dogame.entity.Firebase;
-import com.blogspot.raulfmiranda.dogame.login.Login;
-import com.blogspot.raulfmiranda.dogame.login.LoginFragment;
-import com.blogspot.raulfmiranda.dogame.login.LoginPresenter;
-import com.blogspot.raulfmiranda.dogame.login.OnLoginInteractionListener;
-import com.blogspot.raulfmiranda.dogame.login.RegisterFragment;
+import com.blogspot.raulfmiranda.dogame.entity.remote.Firebase;
 import com.blogspot.raulfmiranda.dogame.login.exception.ConfirmException;
 import com.blogspot.raulfmiranda.dogame.login.exception.EmailException;
 import com.blogspot.raulfmiranda.dogame.login.exception.NameException;
 import com.blogspot.raulfmiranda.dogame.login.exception.PasswordException;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends BaseActivity implements OnLoginInteractionListener , Login.View {
 
@@ -46,8 +40,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   public void onStart() {
     super.onStart();
     if (Firebase.getInstance().getCurrentUser() != null) {
-      Firebase.getInstance().loadUser();
-      showDoGame();
+      presenter.startLogin();
     } else {
       showLogin();
     }

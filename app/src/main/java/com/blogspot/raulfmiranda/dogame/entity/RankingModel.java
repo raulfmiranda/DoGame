@@ -2,6 +2,7 @@ package com.blogspot.raulfmiranda.dogame.entity;
 
 import android.support.annotation.NonNull;
 
+import com.blogspot.raulfmiranda.dogame.entity.remote.Firebase;
 import com.blogspot.raulfmiranda.dogame.ranking.Ranking;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
