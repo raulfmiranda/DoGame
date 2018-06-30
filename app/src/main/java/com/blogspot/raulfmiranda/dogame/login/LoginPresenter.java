@@ -1,5 +1,7 @@
 package com.blogspot.raulfmiranda.dogame.login;
 
+import android.util.Patterns;
+
 import com.blogspot.raulfmiranda.dogame.entity.LoginModel;
 import com.blogspot.raulfmiranda.dogame.login.exception.ConfirmException;
 import com.blogspot.raulfmiranda.dogame.login.exception.EmailException;
@@ -14,7 +16,7 @@ public class LoginPresenter implements Login.Presenter {
   private Login.View view;
   private Login.Model model;
 
-  public LoginPresenter() {
+  LoginPresenter() {
     model = new LoginModel(this);
   }
 
@@ -75,6 +77,11 @@ public class LoginPresenter implements Login.Presenter {
     view.issueError(message);
   }
 
+  @Override
+  public void issueError(String errorCode, String messageDefault) {
+    view.issueError(errorCode, messageDefault);
+  }
+
 
 
 
@@ -85,9 +92,10 @@ public class LoginPresenter implements Login.Presenter {
   }
 
   private void validateEmail(String email) throws EmailException {
-    Pattern pattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
-    Matcher matcher = pattern.matcher(email);
-    if (!matcher.find()) {
+//    Pattern pattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+//    Matcher matcher = pattern.matcher(email);
+//    if (!matcher.find()) {
+    if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
       throw new EmailException();
     }
   }

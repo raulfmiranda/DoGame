@@ -91,8 +91,86 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   public void issueError(String mensagem) {
     fragment.hideProgress();
     Snackbar
-        .make(fragment.getView(), mensagem, Snackbar.LENGTH_SHORT)
-        .show();
+            .make(fragment.getView(), mensagem, Snackbar.LENGTH_SHORT)
+            .show();
+  }
+
+  @Override
+  public void issueError(String errorCode, String messageDefault) {
+    String msgError;
+    switch (errorCode) {
+      case "ERROR_INVALID_CUSTOM_TOKEN":
+        msgError = getString(R.string.ERROR_INVALID_CUSTOM_TOKEN);
+        break;
+
+      case "ERROR_CUSTOM_TOKEN_MISMATCH":
+        msgError = getString(R.string.ERROR_CUSTOM_TOKEN_MISMATCH);
+        break;
+
+      case "ERROR_INVALID_CREDENTIAL":
+        msgError = getString(R.string.ERROR_INVALID_CREDENTIAL);
+        break;
+
+      case "ERROR_INVALID_EMAIL":
+        msgError = getString(R.string.ERROR_INVALID_EMAIL);
+        break;
+
+      case "ERROR_WRONG_PASSWORD":
+        msgError = getString(R.string.ERROR_WRONG_PASSWORD);
+        break;
+
+      case "ERROR_USER_MISMATCH":
+        msgError = getString(R.string.ERROR_USER_MISMATCH);
+        break;
+
+      case "ERROR_REQUIRES_RECENT_LOGIN":
+        msgError = getString(R.string.ERROR_REQUIRES_RECENT_LOGIN);
+        break;
+
+      case "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL":
+        msgError = getString(R.string.ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL);
+        break;
+
+      case "ERROR_EMAIL_ALREADY_IN_USE":
+        msgError = getString(R.string.ERROR_EMAIL_ALREADY_IN_USE);
+        break;
+
+      case "ERROR_CREDENTIAL_ALREADY_IN_USE":
+        msgError = getString(R.string.ERROR_CREDENTIAL_ALREADY_IN_USE);
+        break;
+
+      case "ERROR_USER_DISABLED":
+        msgError = getString(R.string.ERROR_USER_DISABLED);
+        break;
+
+      case "ERROR_USER_TOKEN_EXPIRED":
+        msgError = getString(R.string.ERROR_USER_TOKEN_EXPIRED);
+        break;
+
+      case "ERROR_USER_NOT_FOUND":
+        msgError = getString(R.string.ERROR_USER_NOT_FOUND);
+        break;
+
+      case "ERROR_INVALID_USER_TOKEN":
+        msgError = getString(R.string.ERROR_INVALID_USER_TOKEN);
+        break;
+
+      case "ERROR_OPERATION_NOT_ALLOWED":
+        msgError = getString(R.string.ERROR_OPERATION_NOT_ALLOWED);
+        break;
+
+      case "ERROR_WEAK_PASSWORD":
+        msgError = getString(R.string.ERROR_WEAK_PASSWORD);
+        break;
+
+      default:
+        msgError = messageDefault;
+    }
+
+    fragment.hideProgress();
+    Snackbar
+            .make(fragment.getView(), msgError, Snackbar.LENGTH_SHORT)
+            .show();
   }
 
   @Override
