@@ -12,6 +12,7 @@ public interface Login {
     void showDoGame();
     void finishRegistration();
     void issueError(String message);
+    void issueError(String erroCode, String messageDefault);
   }
 
   interface Presenter {
@@ -22,7 +23,8 @@ public interface Login {
         throws EmailException, PasswordException;
     void operationAborted();
     void endOperation();
-    void issueError(String message);
+    void issueError(String erroCode, String messageDefault);
+    void issueError(String erroCode);
     void startLogin();
   }
 

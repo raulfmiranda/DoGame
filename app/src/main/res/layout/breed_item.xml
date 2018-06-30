@@ -13,7 +13,6 @@ android:layout_height="@dimen/list_item_height">
     android:layout_gravity="center_vertical"
     android:padding="@dimen/default_padding"
     android:background="@drawable/rounded_rectangle"
-    android:text="Breed"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
     android:textStyle="bold"
     android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"

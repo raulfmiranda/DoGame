@@ -9,7 +9,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -78,7 +80,8 @@ public class LoginModel implements Login.Model, OnCompleteListener<AuthResult>, 
       }
     } else {
       mAuthTask = null;
-      presenter.issueError(Objects.requireNonNull(task.getException()).getMessage());
+      String errorCode = ((FirebaseAuthException) Objects.requireNonNull(task.getException())).getErrorCode();
+      presenter.issueError(errorCode, task.getException().getMessage());
     }
   }
 
