@@ -8,6 +8,7 @@ import com.blogspot.raulfmiranda.dogame.Util;
 import com.blogspot.raulfmiranda.dogame.entity.Dog;
 import com.blogspot.raulfmiranda.dogame.entity.DogModel;
 import com.blogspot.raulfmiranda.dogame.entity.DogModelListener;
+import com.blogspot.raulfmiranda.dogame.entity.remote.Firebase;
 
 import java.util.List;
 import java.util.Random;
@@ -26,6 +27,7 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
     private Timer timer;
     private final int TIME_MAX = 31;
     private int score = 0;
+    private int startScore = 0;
     private int time = TIME_MAX;
 
     QuizPresenter(Quiz.View view, Context context) {
@@ -59,23 +61,26 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
                 checkedAnswer = checkedAnswer.replace("(A)", "");
 
                 if(checkedAnswer.equals(currentDog.getBreedSubreed())) {
+                    Firebase.getInstance().increaseScore(1);
                     Util.Companion.playSound(context, Util.Companion.getSOUND_POSITIVE());
                     this.score++;
                 }
                 else {
+                    Firebase.getInstance().decreaseScore(1);
                     Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-                    this.score = 0;
+                    this.score--;
                 }
                 break;
             case SKIP:
                 if(this.score > 0) {
                     Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-                    this.score--;
+//                    this.score--;
                 }
                 break;
             case TIMEOUT:
+                Firebase.getInstance().decreaseScore(1);
                 Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-                this.score = 0;
+                this.score--;
                 break;
         }
     }
@@ -83,6 +88,17 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
     @Override
     public int getScore() {
         return this.score;
+    }
+
+    @Override
+    public void fetchScore() {
+        this.score = Firebase.getInstance().getUser().getScore();
+        this.startScore = this.score;
+    }
+
+    @Override
+    public void pushScore() {
+        Firebase.getInstance().getUser().increaseScore(this.score - this.startScore);
     }
 
     @Override

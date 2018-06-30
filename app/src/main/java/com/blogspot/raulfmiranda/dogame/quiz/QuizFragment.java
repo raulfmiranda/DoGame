@@ -54,6 +54,7 @@ public class QuizFragment extends Fragment implements Quiz.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new QuizPresenter(this, getActivity());
+        presenter.fetchScore();
     }
 
     @Override
@@ -124,7 +125,20 @@ public class QuizFragment extends Fragment implements Quiz.View {
                 .get()
                 .load(uriDogImage)
                 .placeholder(R.drawable.dog)
-                .into(imgView);
+                .into(imgView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        hideProgress();
+                        blinkScore();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        hideProgress();
+                        String erroMsg = getString(R.string.erro_dog_image);
+                        Toast.makeText(getContext(), erroMsg, Toast.LENGTH_LONG).show();
+                    }
+                });
 
         for (int i = 0; i < rdGroup.getChildCount(); i++) {
             RadioButton rdButton = (RadioButton) rdGroup.getChildAt(i);
@@ -150,10 +164,14 @@ public class QuizFragment extends Fragment implements Quiz.View {
     }
 
     @Override
+    public void onDestroy() {
+        presenter.pushScore();
+        super.onDestroy();
+    }
+
+    @Override
     public void randomDogSuccessfullyRetrieved(Dog dog, List<String> randomBreeds) {
         loadScreen(dog, randomBreeds);
-        hideProgress();
-        blinkScore();
     }
 
     @Override

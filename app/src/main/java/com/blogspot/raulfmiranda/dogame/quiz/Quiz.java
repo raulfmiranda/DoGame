@@ -17,6 +17,8 @@ public interface Quiz {
         void requestRandomDog();
         void updateScore(QuizChoice quizChoice, String checkedAnswer);
         int getScore();
+        void fetchScore();
+        void pushScore();
         void startTimer();
         void stopTimer();
     }
