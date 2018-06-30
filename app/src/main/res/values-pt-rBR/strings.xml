@@ -32,4 +32,23 @@
     <string name="choose_breed">Escolha uma raça:</string>
     <string name="erro_dog_image">Imagem do cachorro não foi encontrada.</string>
     <string name="name">Nome</string>
+    <string name="play">Jogar</string>
+    <string name="ranking">Ranking</string>
+    <string name="welcome">Bem-vindo(a) ao DoGame!\nAqui você pode jogar um Quiz sobre raças de cachorros ou pode apenas conhecê-las melhor na área de estudos.\nAcesse todas as funcionalidades pelo menu no canto superior esquerdo ou clique no botão a seguir caso queira logo se desafiar!</string>
+    <string name="ERROR_INVALID_CUSTOM_TOKEN">O formato de token personalizado está incorreto. Por favor, verifique a documentação.</string>
+    <string name="ERROR_CUSTOM_TOKEN_MISMATCH">O token personalizado corresponde a um público diferente.</string>
+    <string name="ERROR_INVALID_CREDENTIAL">A credencial de autenticação fornecida está incorreta ou expirou.</string>
+    <string name="ERROR_INVALID_EMAIL">O endereço de email está mal formatado.</string>
+    <string name="ERROR_WRONG_PASSWORD">A senha é inválida ou o usuário não possui uma senha.</string>
+    <string name="ERROR_USER_MISMATCH">As credenciais fornecidas não correspondem ao usuário previamente conectado.</string>
+    <string name="ERROR_REQUIRES_RECENT_LOGIN">Esta operação é sensível e requer autenticação recente. Faça o login novamente antes de tentar novamente esta solicitação.</string>
+    <string name="ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL">Já existe uma conta com o mesmo endereço de e-mail, mas com credenciais de login diferentes. Faça login usando um provedor associado a esse endereço de e-mail.</string>
+    <string name="ERROR_EMAIL_ALREADY_IN_USE">O endereço de e-mail já está sendo usado por outra conta.</string>
+    <string name="ERROR_CREDENTIAL_ALREADY_IN_USE">Esta credencial já está associada a uma conta de usuário diferente.</string>
+    <string name="ERROR_USER_DISABLED">A conta do usuário foi desativada por um administrador.</string>
+    <string name="ERROR_USER_TOKEN_EXPIRED">A credencial do usuário não é mais válida. O usuário deve entrar novamente.</string>
+    <string name="ERROR_USER_NOT_FOUND">Não há registro de usuário correspondente a esse identificador. O usuário pode ter sido excluído.</string>
+    <string name="ERROR_INVALID_USER_TOKEN">A credencial do usuário não é mais válida. O usuário deve entrar novamente.</string>
+    <string name="ERROR_OPERATION_NOT_ALLOWED">Esta operação não é permitida. Você deve ativar este serviço no console.</string>
+    <string name="ERROR_WEAK_PASSWORD">A senha dada é inválida.</string>
 </resources>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -33,6 +34,7 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
 //    private RecyclerView mRecyclerView;
     private Spinner spnBreeds;
     private ImageView imgDogSearch;
+    private Button btnMoreDogImg;
     private FrameLayout frmViewDogProgress;
     private List<Breed> breeds;
 
@@ -54,6 +56,7 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
 //        mRecyclerView = view.findViewById(R.id.rv_view_dog);
         spnBreeds = view.findViewById(R.id.spnBreeds);
         imgDogSearch = view.findViewById(R.id.imgDogSearch);
+        btnMoreDogImg = view.findViewById(R.id.btnMoreDogImg);
         frmViewDogProgress = view.findViewById(R.id.frmViewDogProgress);
         frmViewDogProgress.setVisibility(FrameLayout.VISIBLE);
 
@@ -62,18 +65,19 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView tv = (TextView) view;
                 String breed = tv.getText().toString();
-
-                if(!breed.contains(" ")) {
-                    presenter.requestRandomDogByBreed(breed);
-                } else {
-                    String[] breedSubreed = breed.split(" ");
-                    presenter.requestRandomDogBySubBreed(breedSubreed[0], breedSubreed[1]);
-                }
+                requestDog(breed);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
+        btnMoreDogImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String breed = spnBreeds.getItemAtPosition(spnBreeds.getSelectedItemPosition()).toString();
+                requestDog(breed);
             }
         });
 
@@ -112,7 +116,6 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
         Picasso
                 .get()
                 .load(uriDogImage)
-                .placeholder(R.drawable.dog)
                 .into(imgDogSearch, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
@@ -142,5 +145,14 @@ public class ViewDogFragment extends Fragment implements ViewDog.View {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, breedSubreeds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnBreeds.setAdapter(adapter);
+    }
+
+    private void requestDog(String breed) {
+        if(!breed.contains(" ")) {
+            presenter.requestRandomDogByBreed(breed);
+        } else {
+            String[] breedSubreed = breed.split(" ");
+            presenter.requestRandomDogBySubBreed(breedSubreed[0], breedSubreed[1]);
+        }
     }
 }
