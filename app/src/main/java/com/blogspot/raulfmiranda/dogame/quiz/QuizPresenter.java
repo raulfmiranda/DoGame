@@ -65,9 +65,9 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
                     this.score++;
                 }
                 else {
-                    Firebase.getInstance().decreaseScore(1);
                     Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-                    this.score--;
+                    if(this.score > 0)
+                        this.score--;
                 }
                 break;
             case SKIP:
@@ -76,9 +76,9 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
                 }
                 break;
             case TIMEOUT:
-                Firebase.getInstance().decreaseScore(1);
                 Util.Companion.playSound(context, Util.Companion.getSOUND_ERROR());
-                this.score--;
+                if(this.score > 0)
+                    this.score--;
                 break;
         }
     }
