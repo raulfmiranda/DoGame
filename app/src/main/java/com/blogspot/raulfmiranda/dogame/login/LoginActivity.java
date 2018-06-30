@@ -3,6 +3,7 @@ package com.blogspot.raulfmiranda.dogame.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.widget.Toast;
 
 import com.blogspot.raulfmiranda.dogame.BaseActivity;
 import com.blogspot.raulfmiranda.dogame.BaseFragment;
@@ -88,11 +89,9 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
   }
 
   @Override
-  public void issueError(String mensagem) {
+  public void issueError(String message) {
     fragment.hideProgress();
-    Snackbar
-            .make(fragment.getView(), mensagem, Snackbar.LENGTH_SHORT)
-            .show();
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show();
   }
 
   @Override
@@ -168,9 +167,7 @@ public class LoginActivity extends BaseActivity implements OnLoginInteractionLis
     }
 
     fragment.hideProgress();
-    Snackbar
-            .make(fragment.getView(), msgError, Snackbar.LENGTH_SHORT)
-            .show();
+    Toast.makeText(this, msgError, Toast.LENGTH_LONG).show();
   }
 
   @Override

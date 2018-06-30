@@ -99,7 +99,4 @@ public abstract class BaseFragment extends Fragment {
     }
   }
 
-  public View getView() {
-    return mView;
-  }
 }
