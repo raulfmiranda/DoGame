@@ -47,7 +47,8 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
         currentDog = dog;
         List<String> randomBreeds = dogModel.getFourRandomBreeds(dog.getBreedSubreed());
         Random rand = new Random();
-        randomBreeds.add(rand.nextInt(randomBreeds.size() + 1), dog.getBreedSubreed() + "(A)");
+//        randomBreeds.add(rand.nextInt(randomBreeds.size() + 1), dog.getBreedSubreed() + "(A)");
+        randomBreeds.add(rand.nextInt(randomBreeds.size() + 1), dog.getBreedSubreed());
 
         view.randomDogSuccessfullyRetrieved(dog, randomBreeds);
     }
@@ -58,7 +59,7 @@ class QuizPresenter implements Quiz.Presenter, DogModelListener {
         switch (quizChoice) {
             case NEXT:
                 checkedAnswer = checkedAnswer.replace(" ", "-");
-                checkedAnswer = checkedAnswer.replace("(A)", "");
+//                checkedAnswer = checkedAnswer.replace("(A)", "");
 
                 if(checkedAnswer.equals(currentDog.getBreedSubreed())) {
                     Util.Companion.playSound(context, Util.Companion.getSOUND_POSITIVE());

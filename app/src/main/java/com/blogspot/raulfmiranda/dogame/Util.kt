@@ -17,7 +17,7 @@ class Util {
 
         fun playSound(context: Context, soundID: Int) {
             initSounds(context)
-            val volume = 0.5f // whatever in the range = 0.0 to 1.0
+            val volume = 0.2f // whatever in the range = 0.0 to 1.0
             // play sound with same right and left volume, with a priority of 1,
             // zero repeats (i.e play once), and a playback rate of 1f
             soundPool?.play(soundPoolMap?.get(soundID)!!, volume, volume, 1, 0, 1f);
